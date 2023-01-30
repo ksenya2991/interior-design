@@ -1,0 +1,1015 @@
+@use "sass:math";
+@function toVw($target) {
+    $vw-context: (1440 * 0.01) * 1px;
+    @return math.div($target, $vw-context) * 1vw;
+}
+
+@import "colors.scss";
+
+@import "mixins.scss";
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Jost&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html{
+    font-family: 'Jost';
+    color: $c-dark-gray;
+    font-size: toVw(22px);
+    scroll-behavior: smooth;
+    background-color: #F5F5F5;
+    @include media(phone-only){
+        font-size: 15px;
+    }
+}
+
+img{
+    width: 100%;
+}
+
+a{
+    text-decoration: none;
+}
+
+li{
+    list-style: none;
+}
+
+.header{
+    @include media(phone-only){
+        margin-top: 60px;
+    }
+    .drop-down-menu{
+        display: none;
+        @include media(phone-only){
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 100;
+            display: block;
+            position: fixed;
+            transition: .8s;
+            overflow: hidden;
+            padding-top: 100px;
+            background-color: #F5F5F5;
+            transform: translateY(-100%);
+            &_list{
+                text-align: center;
+                &_item_link{
+                    color: $c-bronze;
+                    font-size: 25px;
+                }
+            }
+        }
+    }
+
+    .drop-down-menu.active{
+        transform: translateY(0);
+    }
+
+    &__top{
+        padding: toVw(26px) 0 toVw(18px) 0;
+        @include media(phone-only){
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            z-index: 999;
+            position: fixed;
+            padding: 10px 0 10px 0;
+            background-color: #F5F5F5;
+        }
+
+        &__wrapper{
+            margin: auto;
+            width: toVw(1200px);
+            @include flex-between();
+            @include media(phone-only){
+                width: 350px;
+                position: relative;
+            }
+            &__logo{
+                width: toVw(177px);
+                height: toVw(50px);
+                @include media(phone-only){
+                    width: 100px;
+                    height: 30px;
+                }
+            }
+            &__menu{
+                @include media(phone-only){
+                    display: none;
+                }
+                &_list{
+                    width: toVw(538px);
+                    height: toVw(62px);
+                    @include align-items-center();
+                    .item-link{
+                        color: $c-dark;
+                        font-size: toVw(19px);
+                        &:hover{
+                            color: $c-bronze;
+                        }
+                    }
+                }
+            }
+            .menu-btn{
+                display: none;
+                @include media(phone-only){
+                    display: block;
+                    width: 35px;
+                    height: 30px;
+                    position: absolute;
+                    right: 15px;
+                    top: 0;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    &_element{
+                        border: none;
+                        height: 5px;
+                        background-color: $c-bronze;
+                    }
+                }
+            }
+        }
+    }
+    &__main{
+        width: 100%;
+        height: 100%;
+        @include bg-default();
+        background-image: url(../imgs/header-bg.svg);
+        padding: toVw(195px) toVw(720px) toVw(250px) toVw(120px);
+        @include media(phone-only){
+            padding: 20px 30px 50px 30px;
+        }
+        &__container{
+            width: toVw(600px);
+            height: toVw(386px);
+            @include media(phone-only){
+                width: 250px;
+                height: 200px;
+            }
+            &__top_title{
+                font-size: toVw(80px);
+                font-family: 'DM Serif Display';
+                @include media(phone-only){
+                    font-size: 30px;
+                }
+            }
+            &__content_text{
+                margin: toVw(19px) 0 toVw(68px) 0;
+                @include media(phone-only){
+                    margin: 15px 0 25px 0;
+                }
+            }
+            .btn-start{
+                border: none;
+                color: $c-white;
+                cursor: pointer;
+                width: toVw(207px);
+                height: toVw(71px);
+                position: relative;
+                font-size: toVw(18px);
+                background-color: $c-dark;
+                border-radius: toVw(18px);
+                padding: toVw(22px) toVw(67px) toVw(22px) toVw(34px);
+                @include media(phone-only){
+                    width: 110px;
+                    height: 30px;
+                    font-size: 10px;
+                    border-radius: 8px;
+                    padding: 8px 30px 8px 15px;
+                }
+                &::after{
+                    top: toVw(18px);
+                    width: toVw(26px);
+                    right: toVw(30px);
+                    height: toVw(36px);
+                    transition: all 1s;
+                    @include bg-default();
+                    @include after-before();
+                    transform: translateX(0);
+                    background-image: url(../imgs/icons/arrow-icon.svg);
+                    @include media(phone-only){
+                        top: 8px;
+                        width: 12px;
+                        right: 17px;
+                        height: 15px;
+                    }
+                }
+                &:hover{
+                    background-color: #0b0d0f;
+                }
+                &:hover::after{
+                    transform: translateX(50%);
+                }
+            }
+        }
+    }
+}
+
+.about{
+    padding: toVw(175px) 0 toVw(170px) 0;
+    @include media(phone-only){
+        padding: 50px 0 30px 0;
+    }
+    &__container{
+        margin: auto;
+        width: toVw(1200px);
+        @include flex-between();
+        @include media(phone-only){
+            width: 100%;
+            display: block;
+        }
+        &__block{
+            width: toVw(320px);
+            text-align: center;
+            @include media(phone-only){
+                width: 350px;
+                margin: auto;
+                margin-bottom: 20px;
+            }
+            &_title{
+                color: $c-dark;
+                font-size: toVw(25px);
+                font-family: 'DM Serif Display';
+                @include media(phone-only){
+                    font-size: 20px;
+                }
+            }
+            &_content{
+                color: $c-dark;
+                margin-top: toVw(17px);
+                margin-bottom: toVw(48px);
+                @include media(phone-only){
+                    margin-top: 10px;
+                    margin-bottom: 15px;
+                }
+            }
+            &_link{
+                position: relative;
+                font-size: toVw(18px);
+                color: $c-dark-gray;
+                @include media(phone-only){
+                    font-size: 13px;
+                }
+                &::after{
+                    top: toVw(5px);
+                    left: toVw(94px);
+                    width: toVw(24px);
+                    height: toVw(17px);
+                    transition: all 1s;
+                    @include bg-default();
+                    @include after-before();
+                    transform: translateX(0);
+                    background-image: url(../imgs/icons/small-arrow-icon.svg);
+                    @include media(phone-only){
+                        top: 5px;
+                        left: 65px;
+                        width: 15px;
+                        height: 10px;
+                    }
+                }
+                &:hover{
+                    color: $c-bronze;
+                }
+                &:hover::after{
+                    transform: translateX(40%);
+                }
+            }
+        }
+    }
+}
+
+.contact__wrapper{
+    margin: auto;
+    width: toVw(1200px);
+    @include align-items-center();
+    @include media(phone-only){
+        width: 100%;
+        display: block;
+    }
+    &__block{
+        width: toVw(592px);
+        @include media(phone-only){
+            width: 350px;
+            margin: auto;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        &_title{
+            color: $c-dark;
+            font-size: toVw(50px);
+            font-family: 'DM Serif Display';
+            @include media(phone-only){
+                font-size: 30px;
+            }
+        }
+        &_text{
+            margin-top: toVw(42px);
+            margin-bottom: toVw(30px);
+            @include media(phone-only){
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+        }
+        &__details{
+            width: toVw(268px);
+            margin-bottom: toVw(50px);
+            @include align-items-center();
+            @include media(phone-only){
+                width: 180px;
+                margin: auto;
+                margin-bottom: 30px;
+                text-align: start;
+            }
+            &_call-btn{
+                border: none;
+                cursor: pointer;
+                width: toVw(93px);
+                height: toVw(93px);
+                border-radius: 50%;
+                transition: all 1s;
+                background-color: transparent;
+                @include media(phone-only){
+                    width: 50px;
+                    height: 50px;
+                }
+                &:hover{
+                    box-shadow: 0 0 toVw(10px) toVw(0.5px) #dfc6ab;
+                }
+                
+            }
+            &__phone-num_link{
+                color: $c-dark-gray;
+                font-size: toVw(24px);
+                @include media(phone-only){
+                    font-size: 15px;
+                }
+                &:hover{
+                    color: $c-bronze;
+                }
+            }
+        }
+        &_btn{
+            border: none;
+            color: $c-white;
+            cursor: pointer;
+            width: toVw(263px);
+            height: toVw(71px);
+            position: relative;
+            font-size: toVw(18px);
+            background-color: $c-dark;
+            border-radius: toVw(18px);
+            padding: toVw(22px) toVw(67px) toVw(22px) toVw(34px);
+            @include media(phone-only){
+                width: 160px;
+                height: 45px;
+                font-size: 13px;
+                border-radius: 8px;
+                padding: 12px 25px 12px 8px;
+            }
+            &::after{
+                top: toVw(18px);
+                width: toVw(26px);
+                right: toVw(30px);
+                height: toVw(36px);
+                transition: all 1s;
+                @include bg-default();
+                @include after-before();
+                transform: translateX(0);
+                background-image: url(../imgs/icons/arrow-icon.svg);
+                @include media(phone-only){
+                    top: 12px;
+                    width: 15px;
+                    right: 14px;
+                    height: 18px;
+                }
+            }
+            &:hover{
+                background-color: #0b0d0f;
+            }
+            &:hover::after{
+                transform: translateX(50%);
+            }
+        }
+    }
+}
+
+.reviews{
+    padding: toVw(140px) 0 toVw(140px) 0;
+    @include media(phone-only){
+        padding: 30px 0 30px 0;
+    }
+    &__container{
+        margin: auto;
+        width: toVw(1200px);
+        border-radius: toVw(70px);
+        background-color: $c-beidge;
+        padding: toVw(103px) 0 toVw(120px) 0;
+        @include media(phone-only){
+            width: 350px;
+            padding: 25px 0;
+            border-radius: 30px;
+        }
+        &__title{
+            margin: auto;
+            text-align: center;
+            width: toVw(479px);
+            margin-bottom: toVw(45.5px);
+            @include media(phone-only){
+                width: 200px;
+                margin-bottom: 30px;
+            }
+            &_text{
+                color: $c-dark;
+                font-size: toVw(45px);
+                font-family: 'DM Serif Display';
+                @include media(phone-only){
+                    font-size: 20px;
+                }
+            }
+        }
+        &__comments{
+            margin: auto;
+            width: toVw(1100px);
+            @include flex-between();
+            @include media(phone-only){
+                width: 300px;
+                display: block;
+            }
+            &__block{
+                width: toVw(356px);
+                border-radius: toVw(30px);
+                background-color: $c-white;
+                padding: toVw(49.5px) toVw(30px) toVw(45px) toVw(35px);
+                @include media(phone-only){
+                    width: 100%;
+                    border-radius: 15px;
+                    margin-bottom: 20px;
+                    padding: 30px 15px;
+                }
+                &__top{
+                    width: toVw(240px);
+                    margin-bottom: toVw(25px);
+                    @include align-items-center();
+                    @include media(phone-only){
+                        width: 150px;
+                        margin: auto;
+                        margin-bottom: 20px;
+                    }
+                    &__cust-photo{
+                        width: toVw(77px);
+                        height: toVw(77px);
+                        @include media(phone-only){
+                            width: 50px;
+                            height: 50px;
+                        }
+                    }
+                    &__cust-info_name{
+                        color: $c-dark;
+                        font-size: toVw(25px);
+                        font-family: 'DM Serif Display';
+                        @include media(phone-only){
+                            font-size: 15px;
+                        }
+                    }
+                    &__cust-info_location{
+                        font-size: toVw(18px);
+                        @include media(phone-only){
+                            font-size: 12px;
+                        }
+                    }
+                }
+                &__content_text{
+                    font-size: 20px;
+                    @include media(phone-only){
+                        font-size: 15px;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.brands{
+    margin: auto;
+    width: toVw(1200px);
+    @include align-items-center();
+    padding: 0 toVw(50px) 0 toVw(50px);
+    @include media(phone-only){
+        gap: 40px;
+        width: 350px;
+        flex-wrap: wrap;
+        position: relative;
+        padding: 30px 20px 0 20px;
+    }
+    &__container{
+        width: toVw(140px);
+        @include media(phone-only){
+            width: 90px;
+            &:nth-child(2){
+                top: 30px;
+                left: 130px;
+                position: absolute;
+            }
+        }
+    }
+}
+
+.projects{
+    padding: toVw(100px) 0 toVw(80px) 0;
+    @include media(phone-only){
+        padding: 50px 0 30px 0;
+    }
+    &__wrapper{
+        margin: auto;
+        width: toVw(1200px);
+        @include media(phone-only){
+            width: 350px;
+        }
+        &__top{
+            margin: auto;
+            width: toVw(786px);
+            text-align: center;
+            margin-bottom: toVw(70px);
+            @include media(phone-only){
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            &_title{
+                color: $c-dark;
+                font-size: toVw(47px);
+                margin-bottom: toVw(20px);
+                font-family: 'DM Serif Display';
+                @include media(phone-only){
+                    font-size: 27px;
+                    margin-bottom: 10px;
+                }
+            }
+        }
+        &__main{
+            width: 100%;
+            display: grid;
+            row-gap: toVw(60px);
+            grid-template-rows: repeat(2, 1fr);
+            grid-template-columns: repeat(2, 1fr);
+            @include media(phone-only){
+                display: block;
+            }
+            &__block{
+                width: toVw(580px);
+                @include media(phone-only){
+                    width: 100%;
+                    margin: auto;
+                    margin-bottom: 30px;
+                }
+                &__photo{
+                    width: 100%;
+                    margin-bottom: toVw(25px);
+                    @include media(phone-only){
+                        margin-bottom: 15px;
+                    }
+                }
+                &__content{
+                    @include align-items-center();
+                    &__descr_name{
+                        color: $c-dark;
+                        font-size: toVw(25px);
+                        font-family: 'DM Serif Display';
+                        @include media(phone-only){
+                            font-size: 15px;
+                        }
+                    }
+                    &_btn{
+                        border: none;
+                        cursor: pointer;
+                        width: toVw(70px);
+                        height: toVw(70px);
+                        border-radius: 50%;
+                        position: relative;
+                        transition: all 1s;
+                        background-color: $c-beidge;
+                        @include media(phone-only){
+                            width: 50px;
+                            height: 50px;
+                        }
+                        &::after{
+                            top: 40%;
+                            left: 45%;
+                            width: toVw(9px);
+                            height: toVw(16px);
+                            @include bg-default();
+                            @include after-before();
+                            background-image: url(../imgs/icons/arrow-for-circle-btns.svg);
+                            @include media(phone-only){
+                                top: 30%;
+                                left: 35%;
+                                width: 15px;
+                                height: 18px;
+                            }
+                        }
+                        &:hover{
+                            box-shadow: 0 0 toVw(10px) toVw(0.5px) #dfc6ab;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.achvs{
+    width: 100%;
+    background-color: $c-beidge;
+    padding: toVw(140px) toVw(120px);
+    @include media(phone-only){
+        padding: 20px 20px;
+    }
+    &__container{
+        width: toVw(1200px);
+        margin: auto;
+        @include flex-between();
+        @include media(phone-only){
+            width: 330px;
+            flex-wrap: wrap;
+            column-gap: 10px;
+        }
+        &__box{
+            width: toVw(288px);
+            text-align: center;
+            padding: toVw(12px) toVw(44px);
+            border-right: toVw(1px) solid $c-bronze;
+            @include media(phone-only){
+                width: 160px;
+                border-right: none;
+                padding: 10px 10px;
+                border-bottom: 1px solid $c-bronze;
+                &:nth-child(3){
+                    border: none;
+                    padding-top: 0;
+                }
+            }
+            &:last-child{
+                border: none;
+                @include media(phone-only){
+                    padding-top: 0;
+                }
+            }
+            &_number{
+                color: $c-bronze;
+                font-size: toVw(85px);
+                font-family: 'DM Serif Display';
+                @include media(phone-only){
+                    font-size: 55px;
+                }
+            }
+        }
+    }
+}
+
+.blogs{
+    padding: toVw(130px) 0 toVw(100px) 0;
+    @include media(phone-only){
+        padding: 30px 0 20px 0;
+    }
+    &__wrapper{
+        margin: auto;
+        width: toVw(1220px);
+        @include media(phone-only){
+            width: 350px;
+        }
+        &__top{
+            margin: auto;
+            width: toVw(590px);
+            text-align: center;
+            margin-bottom: toVw(70px);
+            @include media(phone-only){
+                width: 100%;
+                margin-bottom: 30px;
+            }
+            &_title{
+                color: $c-dark;
+                font-size: toVw(48px);
+                margin-bottom: toVw(21px);
+                font-family: 'DM Serif Display';
+                @include media(phone-only){
+                    font-size: 27px;
+                    margin-bottom: 15px;
+                }
+            }
+        }
+        &__main{
+            width: 100%;
+            display: grid;
+            row-gap: toVw(40px);
+            grid-template-rows: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
+            @include media(phone-only){
+                display: block;
+            }
+            &__block{
+                width: toVw(387px);
+                border-radius: toVw(62px);
+                border: toVw(1px) solid $c-platinum;
+                padding: toVw(21px) toVw(21px) toVw(40.5px) toVw(21px);
+                @include media(phone-only){
+                    width: 100%;
+                    border-radius: 30px;
+                    margin-bottom: 30px;
+                    padding: 10px 10px 25px 10px;
+                    border: 1px solid $c-platinum;
+                }
+                &__photo{
+                    width: 100%;
+                }
+                &__description{
+                    margin-top: toVw(14.59px);
+                    margin-bottom: toVw(10.5px);
+                    @include media(phone-only){
+                        margin-top: 10px;
+                        margin-bottom: 10px;
+                    }
+                    &_text{
+                        color: $c-dark;
+                        font-size: toVw(25px);
+                        font-family: 'DM Serif Display';
+                        @include media(phone-only){
+                            font-size: 20px;
+                        }
+                    }
+                }
+                &__details{
+                    width: 100%;
+                    @include align-items-center();
+                    &_data{
+                        font-size: toVw(16px);
+                        @include media(phone-only){
+                            font-size: 12px;
+                        }
+                    }
+                    &_btn{
+                        border: none;
+                        cursor: pointer;
+                        width: toVw(52px);
+                        height: toVw(52px);
+                        border-radius: 50%;
+                        position: relative;
+                        transition: all 1s;
+                        background-color: $c-beidge;
+                        @include media(phone-only){
+                            width: 35px;
+                            height: 35px;
+                            // border: 1px solid $c-bronze;
+                        }
+                        &::after{
+                            top: 35%;
+                            left: 45%;
+                            width: toVw(9px);
+                            height: toVw(16px);
+                            @include bg-default();
+                            @include after-before();
+                            background-image: url(../imgs/icons/arrow-for-circle-btns.svg);
+                            @include media(phone-only){
+                                width: 10px;
+                                height: 13px;
+                                left: 37%;
+                                top: 30%;
+                            }
+                        }
+                        &:hover{
+                            box-shadow: 0 0 toVw(10px) toVw(0.5px) #dfc6ab;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.contact-us{
+    margin: auto;
+    text-align: center;
+    width: toVw(1200px);
+    background-color: $c-dark;
+    border-radius: toVw(70px);
+    padding: toVw(100px) toVw(333px) toVw(95px) toVw(333px);
+    @include media(phone-only){
+        width: 350px;
+        border-radius: 30px;
+        padding: 30px 0;
+    }
+    &__content{
+        margin: auto;
+        width: toVw(534px);
+        margin-bottom: toVw(31px);
+        @include media(phone-only){
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        &_title{
+            color: $c-white;
+            font-size: toVw(50px);
+            margin-bottom: toVw(9px);
+            font-family: 'DM Serif Display';
+            @include media(phone-only){
+                font-size: 22px;
+                margin-bottom: 8px;
+            }
+        }
+        &_text{
+            color: $c-white;
+        }
+    }
+    &_button{
+        border: none;
+        cursor: pointer;
+        width: toVw(241px);
+        height: toVw(71px);
+        position: relative;
+        border-radius: toVw(18px);
+        background-color: $c-bronze;
+        padding: toVw(21px) toVw(67px) toVw(23px) toVw(34px);
+        @include media(phone-only){
+            width: 135px;
+            height: 40px;
+            border-radius: 8px;
+            padding: 8px 25px 8px 8px;
+        }
+        &_link{
+            color: $c-white;
+            font-size: toVw(18px);
+            @include media(phone-only){
+                font-size: 13px;
+            }
+        }
+        &::after{
+            top: toVw(27px);
+            width: toVw(27px);
+            right: toVw(30px);
+            height: toVw(17px);
+            transition: all 2s;
+            @include bg-default();
+            @include after-before();
+            transform: translateX(0);
+            background-image: url(../imgs/icons/arrow-icon-dark.svg);
+            @include media(phone-only){
+                top: 15px;
+                right: 8px;
+                width: 13px;
+                height: 10px;
+            }
+        }
+        &:hover{
+            box-shadow: inset 0 0 toVw(10px) #68523a;
+        }
+        &:hover::after{
+            transform: translateX(50%);
+        }
+    }
+}
+.footer__main{
+    padding: toVw(130px) 0 toVw(110px) 0;
+    @include media(phone-only){
+        padding: 30px 0;
+        margin-top: 20px;
+    }
+    &__wrapper{
+        margin: auto;
+        width: toVw(1200px);
+        @include flex-between();
+        @include media(phone-only){
+            width: 350px;
+            row-gap: 20px;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+        &__block{
+            @include media(phone-only){
+                width: 100px;
+            }
+            &__logo{
+                width: toVw(177px);
+                height: toVw(50px);
+                @include media(phone-only){
+                    width: 90px;
+                    height: 30px;
+                    margin: auto;
+                }
+            }
+            &__text{
+                margin-top: toVw(15px);
+                margin-bottom: toVw(10px);
+                @include media(phone-only){
+                    margin-top: 10px;
+                    margin-bottom: 15px;
+                }
+            }
+            &__socials{
+                @include align-items-center();
+                width: toVw(181px);
+                @include media(phone-only){
+                    width: 100px;
+                    margin: auto;
+                }
+                &__icon:hover{
+                    scale: 1.1;
+                    transition: all 0.5s;
+                }
+            }
+            &_title{
+                color: $c-dark;
+                font-size: toVw(25px);
+                font-family: 'DM Serif Display';
+                @include media(phone-only){
+                    font-size: 15px;
+                }
+            }
+            &_list_item{
+                margin-top: toVw(30px);
+                @include media(phone-only){
+                    margin-top: 15px;
+                }
+                &:first-child{
+                    margin-top: toVw(21px);
+                    @include media(phone-only){
+                        margin-top: 15px;
+                    }
+                }
+                &_link{
+                    color: $c-dark-gray;
+                    &:hover{
+                        color: $c-bronze;
+                    }
+                }
+            }
+        }
+        .company-info{
+            width: toVw(324px);
+            @include media(phone-only){
+                width: 300px;
+                margin: auto;
+                text-align: center;
+            }
+        }
+        .contacts-block{
+            width: 115px;
+        }
+    }
+}
+
+.footer__details{
+    padding: toVw(35px) toVw(325px);
+    border-top: toVw(1px) solid $c-platinum;
+    @include media(phone-only){
+        padding: 20px 30px;
+        text-align: center;
+        border-top: 1px solid $c-platinum;
+    }
+    &_text_broze-link{
+        cursor: pointer;
+        color: $c-bronze;
+    }
+}
+
+.scroll-back{
+    border: none;
+    opacity: 0.5;
+    z-index: 50;
+    display: none;
+    cursor: pointer;
+    position: fixed;
+    width: toVw(70px);
+    right: toVw(30px);
+    height: toVw(70px);
+    bottom: toVw(70px);
+    border-radius: 50%;
+    background-color: $c-bronze;
+    &:hover{
+        opacity: 0.6;
+    }
+    .arrow-icon{
+        rotate: -90deg;
+        width: toVw(60px);
+        height: toVw(40px);
+        @include media(phone-only){
+            width: 35px;
+            height: 25px;
+        }
+    }
+    @include media(phone-only){
+        width: 50px;
+        right: 30px;
+        height: 50px;
+        bottom: 40px;
+        display: block;
+    }
+}
