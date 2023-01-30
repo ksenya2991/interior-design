@@ -22,6 +22,7 @@ body, html{
     font-size: toVw(22px);
     scroll-behavior: smooth;
     background-color: #F5F5F5;
+    width: 100%;
     @include media(phone-only){
         font-size: 15px;
     }
@@ -61,9 +62,12 @@ li{
             transform: translateY(-100%);
             &_list{
                 text-align: center;
-                &_item_link{
-                    color: $c-bronze;
-                    font-size: 25px;
+                &_item{
+                    margin-bottom: 20px;
+                    &_link{
+                        color: $c-bronze;
+                        font-size: 25px;
+                    }
                 }
             }
         }
@@ -151,10 +155,8 @@ li{
         }
         &__container{
             width: toVw(600px);
-            height: toVw(386px);
             @include media(phone-only){
                 width: 250px;
-                height: 200px;
             }
             &__top_title{
                 font-size: toVw(80px);
@@ -917,7 +919,7 @@ li{
                 @include align-items-center();
                 width: toVw(181px);
                 @include media(phone-only){
-                    width: 100px;
+                    width: 150px;
                     margin: auto;
                 }
                 &__icon:hover{

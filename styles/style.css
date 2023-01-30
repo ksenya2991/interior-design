@@ -11,6 +11,7 @@ body, html {
   font-size: 1.5277777778vw;
   scroll-behavior: smooth;
   background-color: #F5F5F5;
+  width: 100%;
 }
 @media (max-width: 600px) {
   body, html {
@@ -56,6 +57,9 @@ li {
   }
   .header .drop-down-menu_list {
     text-align: center;
+  }
+  .header .drop-down-menu_list_item {
+    margin-bottom: 20px;
   }
   .header .drop-down-menu_list_item_link {
     color: #CDA274;
@@ -158,12 +162,10 @@ li {
 }
 .header__main__container {
   width: 41.6666666667vw;
-  height: 26.8055555556vw;
 }
 @media (max-width: 600px) {
   .header__main__container {
     width: 250px;
-    height: 200px;
   }
 }
 .header__main__container__top_title {
@@ -1109,7 +1111,7 @@ li {
 }
 @media (max-width: 600px) {
   .footer__main__wrapper__block__socials {
-    width: 100px;
+    width: 150px;
     margin: auto;
   }
 }
